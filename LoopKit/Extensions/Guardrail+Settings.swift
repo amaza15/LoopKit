@@ -9,7 +9,7 @@
 import HealthKit
 
 public extension Guardrail where Value == HKQuantity {
-    static let suspendThreshold = Guardrail(absoluteBounds: (66.1)...(110.9), recommendedBounds: (73.1)...(80.9), unit: .milligramsPerDeciliter, startingSuggestion: 80)
+    static let suspendThreshold = Guardrail(absoluteBounds: (66.1)...(110.9), recommendedBounds: (73.1)...(110), unit: .milligramsPerDeciliter, startingSuggestion: 80)
 
     static func maxSuspendThresholdValue(correctionRangeSchedule: GlucoseRangeSchedule?, preMealTargetRange: ClosedRange<HKQuantity>?, workoutTargetRange: ClosedRange<HKQuantity>?) -> HKQuantity {
 
@@ -110,7 +110,7 @@ public extension Guardrail where Value == HKQuantity {
         maximumBasalRatePrecision decimalPlaces: Int = 3
     ) -> Guardrail {
         
-        let maximumUpperBound = 70.0 / (lowestCarbRatio ?? carbRatio.absoluteBounds.lowerBound.doubleValue(for: .gramsPerUnit))
+        let maximumUpperBound = 100.0 / (lowestCarbRatio ?? carbRatio.absoluteBounds.lowerBound.doubleValue(for: .gramsPerUnit))
         let absoluteUpperBound = maximumUpperBound.matchingOrTruncatedValue(from: supportedBasalRates, withinDecimalPlaces: decimalPlaces)
 
         let recommendedHighScheduledBasalScaleFactor = 6.4
